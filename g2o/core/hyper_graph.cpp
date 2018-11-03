@@ -32,6 +32,7 @@
 #include <queue>
 #include <unordered_set>
 #include <iterator>
+#include <iostream>
 
 namespace g2o {
 
@@ -53,7 +54,7 @@ namespace g2o {
   }
 
   HyperGraph::Edge::Edge(int id) : _id(id)
-  {
+  {Vertex desctrutor
   }
 
   HyperGraph::Edge::~Edge()
@@ -247,15 +248,35 @@ namespace g2o {
 
   void HyperGraph::clear()
   {
+    std::cout << "Clear" << std::endl;
 #if G2O_DELETE_IMPLICITLY_OWNED_OBJECTS
-    for (VertexIDMap::iterator it=_vertices.begin(); it!=_vertices.end(); ++it)
+    std::cout << "ifdef " << &_vertices << std::endl;
+    for (VertexIDMap::iterator it=_vertices.begin(); it!=_vertices.end(); ++it){
+      std::cout << "loop 1" << std::endl;
+      std::cout << "Deleting Vertex ID " << it->first << " it " << 0;
+      std::cout << "loop first" << std::endl;
+      std::cout << "Deleting Vertex ID " << 0 << " it " << it->second;
+      std::cout << "loop second" << std::endl;
+      std::cout << "Deleting Vertex ID " << 0 << " it " << it->second->id();
+      std::cout << "loop third" << std::endl;
       delete (it->second);
-    for (EdgeSet::iterator it=_edges.begin(); it!=_edges.end(); ++it)
+      std::cout << " Done" << std::endl;
+    }
+    std::cout << "Vertices deleted" << std::endl;
+    for (EdgeSet::iterator it=_edges.begin(); it!=_edges.end(); ++it){
+      std::cout << "loop 2" << std::endl;
+      std::cout << "Deleting Vertex it " << &(*it);
       delete (*it);
+      std::cout << " Done " << std::endl;
+    }
+    std::cout << "Edges deleted" << std::endl;
 #endif
-
+    
+    std::cout << "Clearing vertices" << std::endl;
     _vertices.clear();
+    std::cout << "Clearing Edges" << std::endl;
     _edges.clear();
+    std::cout << "Clearing Done" << std::endl;
   }
 
   HyperGraph::~HyperGraph()

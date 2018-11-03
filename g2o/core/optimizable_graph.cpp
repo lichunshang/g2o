@@ -74,8 +74,9 @@ namespace g2o {
 
   OptimizableGraph::Vertex::~Vertex()
   {
-    delete _cacheContainer;
-    delete _userData;
+      std::cout << "Vertex desctrutor" << std::endl;
+//    delete _cacheContainer;
+//    delete _userData;
   }
 
   OptimizableGraph::Vertex* OptimizableGraph::Vertex::clone() const

@@ -34,6 +34,7 @@
 #include <vector>
 #include <limits>
 #include <cstddef>
+#include <iostream>
 
 #include <unordered_map>
 
@@ -121,7 +122,10 @@ namespace g2o {
       class G2O_CORE_API DataContainer {
         public:
           DataContainer() {_userData = 0;}
-          virtual ~DataContainer() { delete _userData;}
+          virtual ~DataContainer() {
+              std::cout << "DataContainer desctrutor" << std::endl;
+//              delete _userData;
+          }
           //! the user data associated with this vertex
           const Data* userData() const { return _userData; }
           Data* userData() { return _userData; }
